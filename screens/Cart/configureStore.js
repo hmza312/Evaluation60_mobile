@@ -1,0 +1,32 @@
+import {createStore, combineReducers, applyMiddleware } from 'redux';
+// import { Dishes } from './dishes';
+// import { Comments } from './comments';
+// import { Promotions } from './promotions';
+// import { Leaders } from './leaders';
+// import { createForms } from 'react-redux-form';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+
+import CartReducer from './reducer';
+import ExploreReducer from '../MainReducer/reducer';
+
+export const ConfigureStore = () => {
+    const store = createStore(
+        combineReducers({
+            
+            explore: ExploreReducer,
+            cart: CartReducer,
+
+            // dishes: Dishes,
+            // comments: Comments,
+            // promotions: Promotions,
+            // leaders: Leaders,
+            // ...createForms({
+            //     feedback: InitialFeedback
+            // })
+        }),
+        applyMiddleware(thunk, logger)
+    );
+
+    return store;
+}
