@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
-export const USER_API_BASE_URL = 'https://d7167f99a769.ngrok.io/api/';
+export const USER_API_BASE_URL = 'https://c2edefbcaa58.ngrok.io/api/';
 
 class axiosInstance {
     constructor() {
@@ -91,6 +91,13 @@ class axiosInstance {
 
     getVendorProducts() {
         return axios.get(USER_API_BASE_URL + `vendorProducts/?username=${this.getusernm()}`, this.getAuthHeader());
+    }
+    addProductReview(data) {
+        console.log('reviewData', data)
+        return axios.post(USER_API_BASE_URL + `productReview/`, data)
+    }
+    postFeedback(data) {
+        return axios.post(USER_API_BASE_URL + `feedback/`, data)
     }
 }
 

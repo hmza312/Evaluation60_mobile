@@ -10,12 +10,15 @@ import logger from 'redux-logger';
 import CartReducer from './reducer';
 import ExploreReducer from '../MainReducer/reducer';
 
+import OrderReducer from '../Orders/reducer';
+
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
             
             explore: ExploreReducer,
             cart: CartReducer,
+            order: ExploreReducer,
 
             // dishes: Dishes,
             // comments: Comments,

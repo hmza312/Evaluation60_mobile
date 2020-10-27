@@ -46,6 +46,17 @@ class DrawerItem extends React.Component {
           <Icon
             name="app2x"
             family="NowExtra"
+
+            size={18}
+            color={focused ? nowTheme.COLORS.PRIMARY : "white"}
+            style={{ opacity: 0.5 }}
+          />
+        );
+      case "Track Order":
+        return (
+          <Icon
+            name="truck"
+            family="Font-Awesome"
             size={18}
             color={focused ? nowTheme.COLORS.PRIMARY : "white"}
             style={{ opacity: 0.5 }}

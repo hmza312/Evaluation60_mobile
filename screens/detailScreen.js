@@ -144,7 +144,7 @@ async componentDidMount() {
     };
 
   render() {
-    alert(this.props.product)
+    // alert(this.props.product)
     let RatingStars = []
     for(var i = 0; i < this.props.product.rating; i++) {
         RatingStars.push(<AntDesign name="star" color="#ebe300" size={20} />)

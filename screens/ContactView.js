@@ -13,7 +13,7 @@ import { Block, Text } from 'galio-framework';
 
 import { Button, Icon } from '../components';
 import { nowTheme } from '../constants';
-
+import axiosInstance from '../APIs/axiosApi';
 const { width, height } = Dimensions.get('screen');
 
 const DismissKeyboard = ({ children }) => (
@@ -28,7 +28,26 @@ class Contact extends Component {
             message:""
         }
     }
+    sendMessage = async (event) =>{
+        event.preventDefault();
+        const data={
+            name: this.state.name,
+            email: this.state.email,
+            message: this.state.message
+        }
+        axiosInstance.postFeedback(data).then(res=>{
+            if(res.status === 201){
+                alert('Feedback Successfully Submitted')
+            }
+            else{
+                alert('Sommething went wrong!Try again')
+            }
+        })
+        
+    }
 
+
+  
     render() { 
         return( 
             <DismissKeyboard>
@@ -58,13 +77,13 @@ class Contact extends Component {
                                         
                                         style={{backgroundColor:"transparent"}}
                                         label="Your Name"
-
+                                        onChangeText={name=> this.setState({name})}
                                         // onChangeText={event => this.setState({name:event.target.value})}
                                     />
                                     <TextInput
                                         style={{marginTop:"5%",backgroundColor:"transparent"}}
                                         label="Your Email"
-                                        
+                                        onChangeText={email=> this.setState({email})}
                                         // onChangeText={event => this.setState({email:event.target.value})}
                                     />
                                     <TextInput
@@ -72,10 +91,11 @@ class Contact extends Component {
                                         label="Your Message"
                                         multiline={true}
                                         numberOfLines={4}
+                                        onChangeText={message=> this.setState({message})}
                                         // onChangeText={event => this.setState({message:event.target.value})}
                                     />
                                     <Block center>
-                                        <Button onPress={this.login} color="purple" round style={styles.createButton}>
+                                        <Button onPress={this.sendMessage} color="purple" round style={styles.createButton}>
                                             <Text
                                                 style={{ fontFamily: 'montserrat-bold' }}
                                                 size={14}
@@ -83,7 +103,7 @@ class Contact extends Component {
                                             >
                                                 SEND MESSAGE
                                             </Text>
-                                        </Button>
+                                        </Button >
                                         <Text  style={{color:'black',fontSize:14,fontFamily: 'montserrat-regular'}}> We'll get back to you soon.</Text>
                                     </Block>
 

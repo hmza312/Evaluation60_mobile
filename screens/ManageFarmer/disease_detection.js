@@ -124,7 +124,7 @@ class Disease_Detection extends React.Component {
     event.preventDefault();
     const payload = { image: this.state.uri.base64 }
     console.log(payload)
-    await fetch('https://d7167f99a769.ngrok.io/disease/classify/', {
+    await fetch('https://eb67c08bc947.ngrok.io/disease/classify/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

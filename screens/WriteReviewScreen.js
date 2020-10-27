@@ -8,6 +8,8 @@ import {rateWidth, rateHeight, deviceWidth} from './Cart/device';
 import * as selectors from './MainReducer/selectors';
 import * as actions from './MainReducer/actions';
 import axios from 'axios';
+import axiosInstance from '../APIs/axiosApi';
+
 class WriteReview extends React.Component {
     constructor(props){
         super(props);
@@ -24,37 +26,31 @@ class WriteReview extends React.Component {
         navigation.goBack();
     };
 
-  addReview = () => {
-    // const {addReview} = this.props;
-    // const reviewdata={
-    //   reviews: this.state.productId,
-    //   reviewer_name:this.state.name,
-    //   review_content:this.state.text,
-    //   rate:this.state.rateValue,
-    // }
-    // addReview(reviewdata);
-    axios.post('https://622070d9b1be.ngrok.io/api/productReview/',{
-      reviews: this.state.productId,
-      reviewerName:this.state.name,
-      reviewContent:this.state.text,
-      rate:this.state.rateValue,
-    })
-    .then(res=>{
-      if(res.status === 201){
-        alert("review added");           
+    addReview = async () => {
+      const { addReview } = this.props;
+      const reviewdata = {
+        reviews: this.state.productId,
+        reviewerName: this.state.name,
+        reviewContent: this.state.text,
+        rate: this.state.rateValue,
       }
-      else{
-        alert("review not added! Try again.");
-      }
-      navigation.goBack();
-    })
-    .then(error=>{
-      console.log(error);
-    })
-    
-    // const {navigation} = this.props;
-    // navigation.goBack();
-  };
+      console.log("addReview",reviewdata);
+      // addReview(reviewdata);
+      await axiosInstance.addProductReview(reviewdata).then(res => {
+          if (res.status === 201) {
+            alert("Review added");
+          }
+          else {
+            alert("review not added! Try again.");
+          }
+          
+        })
+        .then(error => {
+          console.log(error);
+        })
+  
+    }
+
 
   render() {
     const {product} = this.props;
